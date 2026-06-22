@@ -1,0 +1,512 @@
+/* ==========================================
+   Search Container & Form
+   ========================================== */
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ==========================================
+   Input Wrapper & Search Input
+   ========================================== */
+.input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon-left {
+  position: absolute;
+  left: 15px;
+  color: #999;
+  font-size: 16px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 45px 12px 45px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+  background: white;
+  color: #333;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.15);
+}
+
+.search-input::placeholder {
+  color: #bbb;
+}
+
+.search-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   Clear Button
+   ========================================== */
+.clear-button-input {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.clear-button-input:hover {
+  color: #333;
+  background: #f0f0f0;
+}
+
+/* ==========================================
+   Search Button
+   ========================================== */
+.search-button {
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.search-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   Location Button
+   ========================================== */
+.location-button {
+  padding: 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.location-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.location-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* ==========================================
+   Disabled State
+   ========================================== */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ==========================================
+   Suggestions Dropdown
+   ========================================== */
+.suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  max-height: 350px;
+  overflow-y: auto;
+  z-index: 1000;
+  animation: slideDown 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   Loading Indicator in Suggestions
+   ========================================== */
+.suggestions-loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 16px;
+  color: #666;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+  border-radius: 16px 16px 0 0;
+}
+
+.spinner-icon {
+  animation: spin 0.8s linear infinite;
+  color: #4a90e2;
+  font-size: 16px;
+}
+
+@keyframes spin {
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+/* ==========================================
+   Suggestion Items
+   ========================================== */
+.suggestion-item {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f4ff;
+}
+
+.suggestion-item.selected {
+  background-color: #e8f0fe;
+  border-left: 3px solid #4a90e2;
+}
+
+.suggestion-city {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+  flex: 1;
+}
+
+.suggestion-state {
+  color: #999;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.suggestion-country {
+  color: #666;
+  font-size: 11px;
+  background: #f0f0f0;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================
+   Highlight Matching Text
+   ========================================== */
+.highlight {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  color: #4a55e8;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* ==========================================
+   No Suggestions
+   ========================================== */
+.no-suggestions {
+  padding: 25px 20px;
+  text-align: center;
+  color: #999;
+}
+
+.no-suggestions p {
+  margin: 5px 0;
+}
+
+.no-suggestions p:first-child {
+  font-size: 14px;
+  color: #666;
+}
+
+.no-suggestions-hint {
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* ==========================================
+   Suggestions Footer
+   ========================================== */
+.suggestions-footer {
+  padding: 8px 16px;
+  background: #fafafa;
+  font-size: 11px;
+  color: #999;
+  text-align: right;
+  border-top: 1px solid #f0f0f0;
+  border-radius: 0 0 16px 16px;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================
+   Suggestions Loading (Old - Keep for compatibility)
+   ========================================== */
+.suggestions-loading {
+  position: absolute;
+  right: 40px;
+  z-index: 2;
+}
+
+.mini-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ==========================================
+   Scrollbar Styles
+   ========================================== */
+.suggestions-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0 16px 16px 0;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 10px;
+}
+
+.suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Firefox scrollbar */
+.suggestions-dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d1d1 transparent;
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-wrapper {
+    width: 100%;
+  }
+  
+  .search-input {
+    font-size: 15px;
+    padding: 14px 45px 14px 45px;
+  }
+  
+  .search-button {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 15px;
+  }
+  
+  .location-button {
+    width: 100%;
+    height: 45px;
+    border-radius: 25px;
+    gap: 8px;
+    font-size: 16px;
+  }
+  
+  .location-button::after {
+    content: "Use Current Location";
+    font-size: 14px;
+  }
+  
+  .suggestions-dropdown {
+    max-height: 250px;
+    border-radius: 12px;
+  }
+  
+  .suggestion-item {
+    padding: 14px 16px;
+  }
+  
+  .suggestion-country {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    font-size: 14px;
+    padding: 12px 40px 12px 40px;
+  }
+  
+  .search-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  
+  .location-button::after {
+    font-size: 13px;
+  }
+  
+  .suggestions-dropdown {
+    max-height: 200px;
+    font-size: 13px;
+  }
+  
+  .suggestion-city {
+    font-size: 13px;
+  }
+  
+  .suggestion-state {
+    display: none;
+  }
+}
+
+/* ==========================================
+   Dark Mode Support (Optional)
+   ========================================== */
+@media (prefers-color-scheme: dark) {
+  .search-input {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #eee;
+  }
+  
+  .search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+  }
+  
+  .suggestions-dropdown {
+    background: #2a2a2a;
+    border-color: #444;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .suggestion-item {
+    border-bottom-color: #333;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #363636;
+  }
+  
+  .suggestion-item.selected {
+    background-color: #333;
+  }
+  
+  .suggestion-city {
+    color: #eee;
+  }
+  
+  .suggestion-country {
+    background: #444;
+    color: #bbb;
+  }
+  
+  .suggestions-loading-indicator {
+    background: #333;
+    color: #bbb;
+    border-bottom-color: #444;
+  }
+  
+  .suggestions-footer {
+    background: #333;
+    border-top-color: #444;
+  }
+  
+  .clear-button-input:hover {
+    background: #444;
+  }
+}
+
+/* ==========================================
+   Reduced Motion
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  .suggestions-dropdown {
+    animation: none;
+  }
+  
+  .search-button:hover:not(:disabled),
+  .location-button:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .spinner-icon,
+  .mini-spinner {
+    animation-duration: 2s;
+  }
+}
